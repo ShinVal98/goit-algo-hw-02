@@ -1,0 +1,33 @@
+import queue
+import time
+import random
+
+# Створення черги заявок
+request_queue = queue.Queue()
+request_id = 1
+
+# Функція генерації нової заявки
+def generate_request():
+    global request_id
+    request = f"Request #{request_id}"
+    request_queue.put(request)
+    print(f"Generated and added: {request}")
+    request_id += 1
+
+# Функція обробки заявки
+def process_request():
+    if not request_queue.empty():
+        request = request_queue.get()
+        print(f"Processing: {request}")
+    else:
+        print("Queue is empty. Nothing to process.")
+
+# Головний цикл програми
+try:
+    while True:
+        generate_request()
+        time.sleep(random.uniform(0.5, 1.5))  # Імітація часу між заявками
+        process_request()
+        time.sleep(random.uniform(0.5, 1.0))  # Імітація часу обробки заявки
+except KeyboardInterrupt:
+    print("Program exited.")
