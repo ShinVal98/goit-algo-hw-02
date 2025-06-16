@@ -1,0 +1,14 @@
+from collections import deque
+
+def is_palindrome(text):
+    # Попереднє очищення рядка
+    cleaned_text = ''.join(char.lower() for char in text if char.isalnum())
+    
+    # Створення двосторонньої черги
+    d = deque(cleaned_text)
+
+    # Порівнюємо символи з обох кінців черги
+    while len(d) > 1:
+        if d.popleft() != d.pop():
+            return False
+    return True
